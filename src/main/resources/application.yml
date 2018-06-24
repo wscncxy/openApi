@@ -1,0 +1,15 @@
+
+spring:
+    application:
+        name: openApi
+    mvc:
+        favicon:
+            enabled: false
+    profiles:
+        active: @spring-package-profile@
+zuul:
+  routes:
+    openApi:
+      path: /api/**
+      url: http://localhost:8081/index
+

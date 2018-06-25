@@ -12,4 +12,7 @@ zuul:
     openApi:
       path: /api/**
       url: http://localhost:8081/index
+    testApi:
+      path: /testApi/**
+      url: http://localhost:8081/testChange
 

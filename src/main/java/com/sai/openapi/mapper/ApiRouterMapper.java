@@ -1,0 +1,22 @@
+package com.sai.openapi.mapper;
+
+import com.sai.openapi.domain.ApiRouter;
+
+import java.util.List;
+import java.util.Map;
+
+public interface ApiRouterMapper {
+    int deleteByPrimaryKey(Long id);
+
+    int insert(ApiRouter record);
+
+    ApiRouter selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKey(ApiRouter record);
+
+    List<ApiRouter> selectPage(Map<String, Object> param);
+
+    Long selectCount(Map<String, Object> param);
+
+    List<ApiRouter> selectList(Map<String, Object> param);
+}

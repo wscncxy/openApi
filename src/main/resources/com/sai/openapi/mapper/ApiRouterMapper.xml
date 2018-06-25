@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sai.openapi.mapper.ApiRouterMapper">
+    <resultMap id="BaseResultMap" type="com.sai.openapi.domain.ApiRouter">
+                <id column="id" jdbcType="BIGINT" property="id"/>
+                <result column="project_id" jdbcType="BIGINT" property="projectId"/>
+                <result column="router_name" jdbcType="VARCHAR" property="routerName"/>
+                <result column="service_id" jdbcType="VARCHAR" property="serviceId"/>
+                <result column="router_path" jdbcType="VARCHAR" property="routerPath"/>
+                <result column="router_type" jdbcType="INTEGER" property="routerType"/>
+                <result column="create_time" jdbcType="DATETIME" property="createTime"/>
+                <result column="update_time" jdbcType="DATETIME" property="updateTime"/>
+                <result column="request_method" jdbcType="VARCHAR" property="requestMethod"/>
+                <result column="request_content_type" jdbcType="VARCHAR" property="requestContentType"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+          id,
+          project_id,
+          router_name,
+          service_id,
+          router_path,
+          router_type,
+          create_time,
+          update_time,
+          request_method,
+          request_content_type
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM api_router
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    DELETE FROM api_router
+    WHERE id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.sai.openapi.domain.ApiRouter">
+    INSERT INTO api_router (
+            id,
+            project_id,
+            router_name,
+            service_id,
+            router_path,
+            router_type,
+            create_time,
+            update_time,
+            request_method,
+            request_content_type
+    )
+    VALUES (
+            #{id,jdbcType=BIGINT},
+            #{projectId,jdbcType=BIGINT},
+            #{routerName,jdbcType=VARCHAR},
+            #{serviceId,jdbcType=VARCHAR},
+            #{routerPath,jdbcType=VARCHAR},
+            #{routerType,jdbcType=INT},
+            #{createTime,jdbcType=DATETIME},
+            #{updateTime,jdbcType=DATETIME},
+            #{requestMethod,jdbcType=VARCHAR},
+            #{requestContentType,jdbcType=VARCHAR}
+    )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.sai.openapi.domain.ApiRouter">
+    UPDATE
+      api_router
+    SET
+          id = #{id,jdbcType=BIGINT},
+          project_id = #{projectId,jdbcType=BIGINT},
+          router_name = #{routerName,jdbcType=VARCHAR},
+          service_id = #{serviceId,jdbcType=VARCHAR},
+          router_path = #{routerPath,jdbcType=VARCHAR},
+          router_type = #{routerType,jdbcType=INT},
+          create_time = #{createTime,jdbcType=DATETIME},
+          update_time = #{updateTime,jdbcType=DATETIME},
+          request_method = #{requestMethod,jdbcType=VARCHAR},
+          request_content_type = #{requestContentType,jdbcType=VARCHAR}
+    WHERE id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="whereCondition">
+        FROM
+          api_router
+        <where>
+                    <if test="id != null">
+                        AND id = #{id,jdbcType=BIGINT}
+                    </if>
+                    <if test="projectId != null">
+                        AND project_id = #{projectId,jdbcType=BIGINT}
+                    </if>
+                    <if test="routerName != null and routerName != ''">
+                        AND router_name like CONCAT( #{routerName,jdbcType=VARCHAR},'%')
+                    </if>
+                    <if test="serviceId != null and serviceId != ''">
+                        AND service_id like CONCAT( #{serviceId,jdbcType=VARCHAR},'%')
+                    </if>
+                    <if test="routerPath != null and routerPath != ''">
+                        AND router_path like CONCAT( #{routerPath,jdbcType=VARCHAR},'%')
+                    </if>
+                    <if test="routerType != null">
+                        AND router_type = #{routerType,jdbcType=INT}
+                    </if>
+                    <if test="createTime != null">
+                        <![CDATA[ AND create_time > #{createTime,jdbcType=DATETIME} ]]>
+                    </if>
+                    <if test="updateTime != null">
+                        <![CDATA[ AND update_time > #{updateTime,jdbcType=DATETIME} ]]>
+                    </if>
+                    <if test="requestMethod != null and requestMethod != ''">
+                        AND request_method like CONCAT( #{requestMethod,jdbcType=VARCHAR},'%')
+                    </if>
+                    <if test="requestContentType != null and requestContentType != ''">
+                        AND request_content_type like CONCAT( #{requestContentType,jdbcType=VARCHAR},'%')
+                    </if>
+        </where>
+    </sql>
+
+    <select id="selectPage" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <select id="selectCount" parameterType="HashMap" resultType="java.lang.Long">
+        select
+            count(*)
+        <include refid="whereCondition"/>
+    </select>
+</mapper>

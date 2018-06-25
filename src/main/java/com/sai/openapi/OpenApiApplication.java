@@ -24,8 +24,4 @@ public class OpenApiApplication extends SpringBootServletInitializer {
         SpringApplication.run(OpenApiApplication.class, args);
     }
 
-    @Bean
-    public ZuulAuthFilter getZuulAuthFilter(){
-        return new ZuulAuthFilter();
-    }
 }

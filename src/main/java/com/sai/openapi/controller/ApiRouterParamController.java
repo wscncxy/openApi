@@ -54,5 +54,4 @@ public class ApiRouterParamController extends BaseController {
         return getResult(resultCode);
     }
 
-
 }

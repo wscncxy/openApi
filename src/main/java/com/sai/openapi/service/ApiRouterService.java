@@ -12,11 +12,11 @@ public interface ApiRouterService {
 
     ApiRouter selectByPrimaryKey(Long id);
 
-    List<ApiRouter> selectList(ApiRouter example, Integer size);
-
     ResultCode<String> update(ApiRouter record);
 
     ResultCode<String> changeStatus(String merchant, Long id, Integer status);
 
     ResultCode<PageUtil<ApiRouter>> queryList(ApiRouter param, PageUtil<ApiRouter> pageInfo);
+
+    List<ApiRouter> refreshRouter();
 }

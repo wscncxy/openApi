@@ -15,8 +15,8 @@ import javax.servlet.ServletException;
 
 
 @SpringBootApplication
-@ServletComponentScan
 @EnableZuulProxy
+@ServletComponentScan(basePackages = {"com.sai.openapi", "com.sai.web"})
 public class OpenApiApplication extends SpringBootServletInitializer {
 
 

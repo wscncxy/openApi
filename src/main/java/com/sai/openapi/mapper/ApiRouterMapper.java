@@ -16,7 +16,5 @@ public interface ApiRouterMapper {
 
     List<ApiRouter> selectPage(Map<String, Object> param);
 
-    Long selectCount(Map<String, Object> param);
-
-    List<ApiRouter> selectList(Map<String, Object> param);
+    List<ApiRouter> selectAll();
 }

@@ -19,4 +19,6 @@ public interface ApiRouterParamMapper {
     Long selectCount(Map<String, Object> param);
 
     List<ApiRouterParam> selectList(Map<String, Object> param);
+
+    List<ApiRouterParam> selectAll();
 }

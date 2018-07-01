@@ -1,3 +1,4 @@
 consul.host=192.168.2.11
 consul.port=8500
 spring.active.profiles=@spring-package-profile@
+app.name=saiApp

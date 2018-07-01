@@ -1,2 +1,2 @@
 org.springframework.boot.env.PropertySourceLoader=\
-com.sai.openapi.ConsulPropertySourceLoader
+com.sai.web.utils.ConsulPropertySourceLoader

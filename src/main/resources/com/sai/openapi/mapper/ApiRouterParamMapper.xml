@@ -7,8 +7,8 @@
                 <result column="param_key" jdbcType="VARCHAR" property="paramKey"/>
                 <result column="is_need" jdbcType="TINYINT" property="isNeed"/>
                 <result column="data_type" jdbcType="VARCHAR" property="dataType"/>
-                <result column="create_time" jdbcType="DATETIME" property="createTime"/>
-                <result column="update_time" jdbcType="DATETIME" property="updateTime"/>
+                <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+                <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
           id,
@@ -46,8 +46,8 @@
             #{paramKey,jdbcType=VARCHAR},
             #{isNeed,jdbcType=TINYINT},
             #{dataType,jdbcType=VARCHAR},
-            #{createTime,jdbcType=DATETIME},
-            #{updateTime,jdbcType=DATETIME}
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
     )
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.sai.openapi.domain.ApiRouterParam">
@@ -59,8 +59,8 @@
           param_key = #{paramKey,jdbcType=VARCHAR},
           is_need = #{isNeed,jdbcType=TINYINT},
           data_type = #{dataType,jdbcType=VARCHAR},
-          create_time = #{createTime,jdbcType=DATETIME},
-          update_time = #{updateTime,jdbcType=DATETIME}
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+          update_time = #{updateTime,jdbcType=TIMESTAMP}
     WHERE id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -84,10 +84,10 @@
                         AND data_type like CONCAT( #{dataType,jdbcType=VARCHAR},'%')
                     </if>
                     <if test="createTime != null">
-                        <![CDATA[ AND create_time > #{createTime,jdbcType=DATETIME} ]]>
+                        <![CDATA[ AND create_time > #{createTime,jdbcType=TIMESTAMP} ]]>
                     </if>
                     <if test="updateTime != null">
-                        <![CDATA[ AND update_time > #{updateTime,jdbcType=DATETIME} ]]>
+                        <![CDATA[ AND update_time > #{updateTime,jdbcType=TIMESTAMP} ]]>
                     </if>
         </where>
     </sql>
@@ -102,5 +102,11 @@
         select
             count(*)
         <include refid="whereCondition"/>
+    </select>
+    <select id="selectAll" parameterType="Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        api_router_param
     </select>
 </mapper>

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface ApiRouterMapper {
-    int deleteByPrimaryKey(Long id);
-
     int insert(ApiRouter record);
 
     ApiRouter selectByPrimaryKey(Long id);

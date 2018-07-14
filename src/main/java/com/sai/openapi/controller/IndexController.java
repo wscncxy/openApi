@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class IndexController {
 
-    @RequestMapping({"","index"})
+    @RequestMapping({"", "index"})
     public ResultCode index() {
         return ResultCode.success();
     }
@@ -16,5 +16,10 @@ public class IndexController {
     @RequestMapping("testChange")
     public ResultCode index2() {
         return ResultCode.fail();
+    }
+
+    @RequestMapping("notFound")
+    public ResultCode notFound() {
+        return ResultCode.fail("页面失踪了");
     }
 }

@@ -9,7 +9,7 @@
         <result column="router_path" jdbcType="VARCHAR" property="routerPath"/>
         <result column="router_type" jdbcType="INTEGER" property="routerType"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="upTIMESTAMP"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="request_method" jdbcType="VARCHAR" property="requestMethod"/>
         <result column="request_content_type" jdbcType="VARCHAR" property="requestContentType"/>
     </resultMap>
@@ -128,7 +128,7 @@
         <include refid="whereCondition"/>
     </select>
 
-    <select id="selectAll" parameterType="HashMap" resultType="java.lang.Long">
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         FROM

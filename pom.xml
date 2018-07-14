@@ -13,7 +13,7 @@
         <artifactId>webConfig</artifactId>
         <version>0.0.1</version>
     </parent>
-	
+
     <name>saiOpenApi</name>
     <description>openApi project for Spring Boot</description>
 

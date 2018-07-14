@@ -9,12 +9,13 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude={org.springframework.cloud.netflix.zuul.ZuulProxyAutoConfiguration.class})
 @EnableZuulProxy
-@ComponentScan({"com.sai.openapi", "com.sai.web.service","com.sai.web"})
+@ComponentScan(basePackages={"com.sai.openapi","com.sai.web"})
 @ServletComponentScan(basePackages = {"com.sai.openapi", "com.sai.web"})
 public class OpenApiApplication extends SpringBootServletInitializer implements ApplicationContextInitializer<ConfigurableWebApplicationContext> {
 

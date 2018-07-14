@@ -31,15 +31,25 @@ public class MyZuulRouteLocator extends SimpleRouteLocator implements Refreshabl
     @Override
     protected Map<String, ZuulProperties.ZuulRoute> locateRoutes() {
         LinkedHashMap<String, ZuulProperties.ZuulRoute> routesMap = new LinkedHashMap();
+
         routesMap.putAll(super.locateRoutes());
+        ZuulProperties.ZuulRoute zuulBaseRoute = new ZuulProperties.ZuulRoute();
+        zuulBaseRoute.setId(ROUTER_ID_PRE + 0);
+        zuulBaseRoute.setPath(Constants.SYMBOL_LEFT_SLASH + "api");
+        zuulBaseRoute.setServiceId(null);
+        zuulBaseRoute.setUrl("/notFound");
+        zuulBaseRoute.setStripPrefix(true);
+        zuulBaseRoute.setRetryable(true);
+        routesMap.put("api", zuulBaseRoute);
+
         List<ApiRouter> apiRouterList = apiRouterService.refreshRouter();
         if (apiRouterList != null || apiRouterList.size() > 0) {
             for (ApiRouter apiRouter : apiRouterList) {
-                String path = apiRouter.getRouterName();
+                String path = "/router/" + apiRouter.getRouterName();
                 if (StringUtils.isNotBlank(path)) {
                     ZuulProperties.ZuulRoute zuulRoute = new ZuulProperties.ZuulRoute();
                     zuulRoute.setId(ROUTER_ID_PRE + apiRouter.getId());
-                    zuulRoute.setPath(Constants.SYMBOL_LEFT_SLASH + path + Constants.SYMBOL_LEFT_SLASH + "**");
+                    zuulRoute.setPath( path + Constants.SYMBOL_LEFT_SLASH + "**");
                     zuulRoute.setServiceId(apiRouter.getServiceId());
                     zuulRoute.setUrl(apiRouter.getRouterPath());
                     zuulRoute.setStripPrefix(true);

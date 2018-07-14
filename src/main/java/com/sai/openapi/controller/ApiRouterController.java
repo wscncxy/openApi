@@ -5,6 +5,7 @@ import com.sai.core.dto.ResultCode;
 import com.sai.openapi.domain.ApiRouter;
 import com.sai.openapi.service.ApiRouterService;
 import com.sai.web.controller.BaseController;
+import com.sai.web.dto.ResponseCode;
 import com.sai.web.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class ApiRouterController extends BaseController {
     private ApiRouterService apiRouterService;
 
     @RequestMapping(value = "page", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-    public String page(@RequestBody JSONObject jsonObject) throws IOException {
+    public ResponseCode page(@RequestBody JSONObject jsonObject) throws IOException {
         ApiRouter apiRouter = jsonObject.toJavaObject(ApiRouter.class);
         Integer pageSize = jsonObject.getInteger("pageSize");
         if (pageSize == null || pageSize < 1 || pageSize > 100) {
@@ -35,19 +36,19 @@ public class ApiRouterController extends BaseController {
     }
 
     @RequestMapping(value = "add", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-    public String add(@RequestBody ApiRouter apiRouter) throws IOException {
+    public ResponseCode add(@RequestBody ApiRouter apiRouter) throws IOException {
         ResultCode resultCode = apiRouterService.insert(apiRouter);
         return getResult(resultCode);
     }
 
     @RequestMapping(value = "{id}", produces = "application/json;charset=UTF-8")
-    public String get(@PathVariable("id") Long id) throws IOException {
+    public ResponseCode get(@PathVariable("id") Long id) throws IOException {
         ApiRouter apiRouter = apiRouterService.selectByPrimaryKey(id);
         return getSuccessResult(apiRouter);
     }
 
     @RequestMapping(value = "update/{id}", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-    public String update(@PathVariable("id") Long id, @RequestBody ApiRouter apiRouter) throws IOException {
+    public ResponseCode update(@PathVariable("id") Long id, @RequestBody ApiRouter apiRouter) throws IOException {
         apiRouter.setId(id);
         ResultCode resultCode = apiRouterService.update(apiRouter);
         return getResult(resultCode);

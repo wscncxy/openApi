@@ -1,22 +1,7 @@
-
 spring:
     application:
         name: openApi
     mvc:
         favicon:
             enabled: false
-    profiles:
-        active: @spring-package-profile@
-    cloud:
-      consul:
-        host: 192.168.2.11
-        port: 8500
-zuul:
-  routes:
-    openApi:
-      path: /api/**
-      url: http://localhost:8081/index
-    testApi:
-      path: /testApi/**
-      url: http://localhost:8081/testChange
 

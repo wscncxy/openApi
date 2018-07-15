@@ -13,7 +13,8 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
 
-@SpringBootApplication(exclude={org.springframework.cloud.netflix.zuul.ZuulProxyAutoConfiguration.class})
+@SpringBootApplication(exclude={org.springframework.cloud.netflix.zuul.ZuulProxyAutoConfiguration.class,
+        org.springframework.cloud.netflix.zuul.ZuulServerAutoConfiguration.class})
 @EnableZuulProxy
 @ComponentScan(basePackages={"com.sai.openapi","com.sai.web"})
 @ServletComponentScan(basePackages = {"com.sai.openapi", "com.sai.web"})

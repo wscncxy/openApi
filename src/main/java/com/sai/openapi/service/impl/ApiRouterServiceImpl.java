@@ -1,8 +1,10 @@
 package com.sai.openapi.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sai.core.constants.Constants;
 import com.sai.core.dto.ResultCode;
 import com.sai.core.utils.RedisKey;
+import com.sai.openapi.constants.AppConstants;
 import com.sai.openapi.domain.ApiRouter;
 import com.sai.openapi.domain.ApiRouterParam;
 import com.sai.openapi.mapper.ApiRouterMapper;
@@ -156,8 +158,7 @@ public class ApiRouterServiceImpl implements ApiRouterService {
 
                 for (ApiRouter apiRouter : apiRouterList) {
                     apiRouter.setParamList(ApiRouterParamListMap.get(apiRouter.getId()));
-                    String routerInfoKey = RedisKey.create().setProgam(Constants.SAI_PROGRAM_OPENAPI).setOperation("routerInfo").setSign(apiRouter.getRouterName()).build();
-//                    redisTemplateService.set(routerInfoKey, JSONObject.toJSONString(apiRouter));
+                    redisTemplateService.mput(AppConstants.routerInfoKey, apiRouter.getRouterName(), JSONObject.toJSONString(apiRouter), -1);
                 }
 
             }

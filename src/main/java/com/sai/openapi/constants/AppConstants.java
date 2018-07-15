@@ -14,4 +14,5 @@ public class AppConstants {
     public static final String apiRouterRedisKey = RedisKey.create().setProgam(Constants.SAI_PROGRAM_OPENAPI).setOperation(AppConstants.REDIS_OPERATION_ROUTERCACHE).setSign(AppConstants.REDIS_SIGN_ROUTERCACHE).build();
     public static final String apiRouterRedisVersionKey = RedisKey.create().setProgam(Constants.SAI_PROGRAM_OPENAPI).setOperation(AppConstants.REDIS_OPERATION_ROUTERCACHE_VERSION).setSign(AppConstants.REDIS_SIGN_ROUTERCACHE_VERSION).build();
 
+    public static final String routerInfoKey = RedisKey.create().setProgam(Constants.SAI_PROGRAM_OPENAPI).setOperation("zuulRouter").setSign("routerMap").build();
 }

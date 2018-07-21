@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class IndexController {
 
-    @RequestMapping({"", "index"})
+    @RequestMapping({"", "login"})
     public ResultCode index() {
-        return ResultCode.success();
+        return ResultCode.successMsg("login");
     }
 
     @RequestMapping("testChange")

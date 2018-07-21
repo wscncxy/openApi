@@ -14,6 +14,7 @@ public class ApiRouter {
     private Date updateTime;
     private String requestMethod;
     private String requestContentType;
+    private boolean needLogin;
     private List<ApiRouterParam> paramList;
 
     public List<ApiRouterParam> getParamList() {
@@ -102,5 +103,13 @@ public class ApiRouter {
 
     public String getRequestContentType() {
         return this.requestContentType;
+    }
+
+    public boolean isNeedLogin() {
+        return needLogin;
+    }
+
+    public void setNeedLogin(boolean needLogin) {
+        this.needLogin = needLogin;
     }
 }

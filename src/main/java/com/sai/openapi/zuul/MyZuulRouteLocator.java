@@ -42,7 +42,7 @@ public class MyZuulRouteLocator extends SimpleRouteLocator implements Refreshabl
         zuulBaseRoute.setRetryable(true);
         routesMap.put("api", zuulBaseRoute);
 
-        List<ApiRouter> apiRouterList = apiRouterService.refreshRouter();
+        List<ApiRouter> apiRouterList = apiRouterService.refreshRouterInfo();
         if (apiRouterList != null || apiRouterList.size() > 0) {
             for (ApiRouter apiRouter : apiRouterList) {
                 String path = "/router/" + apiRouter.getRouterName();

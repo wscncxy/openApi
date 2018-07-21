@@ -18,5 +18,7 @@ public interface ApiRouterService {
 
     ResultCode<PageUtil<ApiRouter>> queryList(ApiRouter param, PageUtil<ApiRouter> pageInfo);
 
-    List<ApiRouter> refreshRouter();
+    List<ApiRouter> refreshRouterInfo();
+
+    void refreshZuulRouter();
 }

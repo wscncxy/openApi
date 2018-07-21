@@ -4,10 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.sai.core.dto.ResultCode;
 import com.sai.openapi.domain.ApiRouter;
 import com.sai.openapi.service.ApiRouterService;
+import com.sai.openapi.zuul.MyZuulRouteLocator;
 import com.sai.web.controller.BaseController;
 import com.sai.web.dto.ResponseCode;
 import com.sai.web.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.zuul.RoutesRefreshedEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -18,6 +21,12 @@ public class ApiRouterController extends BaseController {
 
     @Autowired
     private ApiRouterService apiRouterService;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+    @Autowired
+    private MyZuulRouteLocator myZuulRouteLocator;
 
     @RequestMapping(value = "page", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
     public ResponseCode page(@RequestBody JSONObject jsonObject) throws IOException {
@@ -54,5 +63,11 @@ public class ApiRouterController extends BaseController {
         return getResult(resultCode);
     }
 
+    @RequestMapping(value = "refreshRouter", method = RequestMethod.GET)
+    public ResponseCode refreshRouter() throws IOException {
+        RoutesRefreshedEvent routesRefreshedEvent = new RoutesRefreshedEvent(myZuulRouteLocator);
+        publisher.publishEvent(routesRefreshedEvent);
+        return getSuccessResult("刷新成功");
+    }
 
 }

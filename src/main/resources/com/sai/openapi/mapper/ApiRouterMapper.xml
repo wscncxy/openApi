@@ -10,6 +10,7 @@
         <result column="router_type" jdbcType="INTEGER" property="routerType"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="need_login" jdbcType="BOOLEAN" property="needLogin"/>
         <result column="request_method" jdbcType="VARCHAR" property="requestMethod"/>
         <result column="request_content_type" jdbcType="VARCHAR" property="requestContentType"/>
     </resultMap>
@@ -23,6 +24,7 @@
           create_time,
           update_time,
           request_method,
+          need_login,
           request_content_type
     </sql>
 
@@ -47,6 +49,7 @@
             create_time,
             update_time,
             request_method,
+            need_login,
             request_content_type
     )
     VALUES (
@@ -59,6 +62,7 @@
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP},
             #{requestMethod,jdbcType=VARCHAR},
+            #{needLogin,jdbcType=BOOLEAN},
             #{requestContentType,jdbcType=VARCHAR}
     )
   </insert>
@@ -74,6 +78,7 @@
           router_type = #{routerType,jdbcType=INTEGER},
           create_time = #{createTime,jdbcType=TIMESTAMP},
           update_time = #{updateTime,jdbcType=TIMESTAMP},
+          need_login = #{needLogin,jdbcType=BOOLEAN},
           request_method = #{requestMethod,jdbcType=VARCHAR},
           request_content_type = #{requestContentType,jdbcType=VARCHAR}
     WHERE id = #{id,jdbcType=BIGINT}

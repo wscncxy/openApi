@@ -10,10 +10,15 @@ import com.sai.openapi.domain.ApiRouterParam;
 import com.sai.openapi.mapper.ApiRouterMapper;
 import com.sai.openapi.mapper.ApiRouterParamMapper;
 import com.sai.openapi.service.ApiRouterService;
+import com.sai.openapi.zuul.MyZuulRouteLocator;
 import com.sai.web.service.RedisTemplateService;
 import com.sai.web.utils.PageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.netflix.zuul.RoutesRefreshedEvent;
+import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -139,7 +144,7 @@ public class ApiRouterServiceImpl implements ApiRouterService {
     }
 
     @Override
-    public List<ApiRouter> refreshRouter() {
+    public List<ApiRouter> refreshRouterInfo() {
         List<ApiRouter> apiRouterList = apiRouterMapper.selectAll();
         if (apiRouterList != null || apiRouterList.size() > 0) {
             List<ApiRouterParam> apiRouterParamList = apiRouterParamMapper.selectAll();
@@ -164,5 +169,10 @@ public class ApiRouterServiceImpl implements ApiRouterService {
             }
         }
         return apiRouterList;
+    }
+
+    @Override
+    public void refreshZuulRouter() {
+
     }
 }

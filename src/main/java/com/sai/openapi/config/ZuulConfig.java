@@ -17,7 +17,7 @@ public class ZuulConfig {
     @Autowired
     private ApiRouterService apiRouterService;
 
-    @Bean
+    @Bean()
     public MyZuulRouteLocator routeLocator() {
         return new MyZuulRouteLocator(this.server.getServletPrefix(), this.zuulProperties, apiRouterService);
     }

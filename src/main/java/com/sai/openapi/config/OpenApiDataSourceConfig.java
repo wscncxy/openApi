@@ -20,8 +20,8 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "com.sai.openapi.mapper", sqlSessionFactoryRef = "saiShoppingSqlSessionFactory")
 public class OpenApiDataSourceConfig {
-    @Bean(name = "saiShoppingDataSource")
-    @ConfigurationProperties(prefix="spring.saiShoppingDataSource.druid")
+    @Bean(name = "saiOpenApiDataSource")
+    @ConfigurationProperties(prefix="spring.saiOpenApiDataSource.druid")
     public DataSource dataSource(){
         return DruidDataSourceBuilder.create().build();
     }

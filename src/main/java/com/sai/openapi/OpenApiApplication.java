@@ -12,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
+import java.util.LinkedList;
+
 
 @SpringBootApplication(exclude={org.springframework.cloud.netflix.zuul.ZuulProxyAutoConfiguration.class,
         org.springframework.cloud.netflix.zuul.ZuulServerAutoConfiguration.class})
@@ -22,13 +24,13 @@ public class OpenApiApplication extends SpringBootServletInitializer implements 
 
     @Autowired
     private ServerProperties properties;
-
+LinkedList
     public static void main(String[] args) {
         SpringApplication.run(OpenApiApplication.class, args);
     }
 
     @Override
-    public void initialize(ConfigurableWebApplicationContext applicationContext) {
+public void initialize(ConfigurableWebApplicationContext applicationContext) {
         System.out.println(11111);
     }
 }
